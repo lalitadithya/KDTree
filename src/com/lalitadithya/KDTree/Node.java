@@ -1,25 +1,26 @@
 package com.lalitadithya.KDTree;
 
 /**
- * Created by Lalit Adithya on 1/23/2017.
+ * A class that represents a node in the KD Tree
+ * @param <T> the type of object that the node stores
  */
 class Node<T> {
     private T object;
-    private Point point;
+    private IPoint IPoint;
     private Node<T> leftChild, rightChild;
 
-    Node(T object, Point point) {
+    Node(T object, IPoint IPoint) {
         this.object = object;
-        this.point = point;
+        this.IPoint = IPoint;
         leftChild = rightChild = null;
     }
 
-    Point getPoint() {
-        return point;
+    IPoint getIPoint() {
+        return IPoint;
     }
 
-    void setPoint(Point point) {
-        this.point = point;
+    void setIPoint(IPoint IPoint) {
+        this.IPoint = IPoint;
     }
 
     T getObject() {

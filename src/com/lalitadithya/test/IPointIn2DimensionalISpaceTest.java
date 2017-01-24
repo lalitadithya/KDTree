@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Created by Lalit Adithya on 1/23/2017.
  */
-class PointIn2DimensionalSpaceTest {
+class IPointIn2DimensionalISpaceTest {
     private PointIn2DimensionalSpace myPoint;
 
     @BeforeEach

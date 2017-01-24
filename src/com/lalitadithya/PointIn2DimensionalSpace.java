@@ -1,6 +1,6 @@
 package com.lalitadithya;
 
-import com.lalitadithya.KDTree.Point;
+import com.lalitadithya.KDTree.IPoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Lalit Adithya on 1/23/2017.
  */
-public class PointIn2DimensionalSpace implements Point {
+public class PointIn2DimensionalSpace implements IPoint {
     private static final int NUMBER_OF_DIMENSIONS = 2;
     private List<Double> dimensions;
 
@@ -25,7 +25,6 @@ public class PointIn2DimensionalSpace implements Point {
         return dimensions.get(n);
     }
 
-    @Override
     public void setNthDimension(int n, double value) {
         if (n > dimensions.size() || n < 0) {
             throw new ArrayIndexOutOfBoundsException(n + " dimension does not exist");
@@ -52,7 +51,7 @@ public class PointIn2DimensionalSpace implements Point {
         return NUMBER_OF_DIMENSIONS;
     }
 
-    public boolean equals(Point other) {
+    public boolean equals(IPoint other) {
         return this.getDimensions().equals(other.getDimensions());
     }
 

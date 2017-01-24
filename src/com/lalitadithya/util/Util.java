@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Lalit Adithya on 1/24/2017.
+ * An utility class used for testing
  */
-public class Util {
+public final class Util {
 
     public static PointIn2DimensionalSpace getPointObject(double[] values) {
         PointIn2DimensionalSpace myPoint = new PointIn2DimensionalSpace();

@@ -1,6 +1,6 @@
 package com.lalitadithya.test;
 
-import com.lalitadithya.KDTree.Space;
+import com.lalitadithya.KDTree.ISpace;
 import com.lalitadithya.PointIn2DimensionalSpace;
 import com.lalitadithya.Rectangle;
 import org.junit.jupiter.api.Test;
@@ -48,16 +48,16 @@ class RectangleTest {
     void getLocationOfPoint() {
         PointIn2DimensionalSpace myPoint = getPointObject(new double[]{10.0, 10.0});
         Rectangle rectangle = new Rectangle(getPointObject(new double[]{5.0, 2.0}), getPointObject(new double[]{1.0, 3.0}));
-        assertEquals(Space.Location.LESS_THAN, rectangle.getLocationOfPoint(myPoint, 0));
-        assertEquals(Space.Location.LESS_THAN, rectangle.getLocationOfPoint(myPoint, 1));
+        assertEquals(ISpace.Location.WEST, rectangle.getLocationOfPoint(myPoint, 0));
+        assertEquals(ISpace.Location.WEST, rectangle.getLocationOfPoint(myPoint, 1));
 
         rectangle = new Rectangle(getPointObject(new double[]{35.0, 52.0}), getPointObject(new double[]{21.0, 35.0}));
-        assertEquals(Space.Location.GREATER_THAN, rectangle.getLocationOfPoint(myPoint, 0));
-        assertEquals(Space.Location.GREATER_THAN, rectangle.getLocationOfPoint(myPoint, 1));
+        assertEquals(ISpace.Location.EAST, rectangle.getLocationOfPoint(myPoint, 0));
+        assertEquals(ISpace.Location.EAST, rectangle.getLocationOfPoint(myPoint, 1));
 
         rectangle = new Rectangle(getPointObject(new double[]{15.0, 12.0}), getPointObject(new double[]{1.0, 3.0}));
-        assertEquals(Space.Location.CANNOT_SAY, rectangle.getLocationOfPoint(myPoint, 0));
-        assertEquals(Space.Location.CANNOT_SAY, rectangle.getLocationOfPoint(myPoint, 1));
+        assertEquals(ISpace.Location.CANNOT_SAY, rectangle.getLocationOfPoint(myPoint, 0));
+        assertEquals(ISpace.Location.CANNOT_SAY, rectangle.getLocationOfPoint(myPoint, 1));
     }
 
     @Test

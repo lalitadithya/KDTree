@@ -1,12 +1,12 @@
 package com.lalitadithya;
 
-import com.lalitadithya.KDTree.Point;
-import com.lalitadithya.KDTree.Space;
+import com.lalitadithya.KDTree.IPoint;
+import com.lalitadithya.KDTree.ISpace;
 
 /**
  * Created by Lalit Adithya on 1/24/2017.
  */
-public class Rectangle implements Space {
+public class Rectangle implements ISpace {
     private static final int NUMBER_DIMENSIONS = 2;
     private PointIn2DimensionalSpace northEast;
     private PointIn2DimensionalSpace southWest;
@@ -33,36 +33,36 @@ public class Rectangle implements Space {
     }
 
     @Override
-    public Location getLocationOfPoint(Point point, int dimension) {
-        if (point.getNumberOfDimensions() != 2) {
+    public Location getLocationOfPoint(IPoint IPoint, int dimension) {
+        if (IPoint.getNumberOfDimensions() != 2) {
             throw new IllegalArgumentException("Number of dimensions must be 2");
         }
         if (dimension < 0 || dimension > 1) {
             throw new IllegalArgumentException("Number of dimensions must be 2");
         }
 
-        if (point.getNthDimension(dimension) > northEast.getNthDimension(dimension) && point.getNthDimension(dimension) > southWest.getNthDimension(dimension)) {
-            return Location.LESS_THAN;
-        } else if (point.getNthDimension(dimension) < northEast.getNthDimension(dimension) && point.getNthDimension(dimension) < southWest.getNthDimension(dimension)) {
-            return Location.GREATER_THAN;
+        if (IPoint.getNthDimension(dimension) > northEast.getNthDimension(dimension) && IPoint.getNthDimension(dimension) > southWest.getNthDimension(dimension)) {
+            return Location.WEST;
+        } else if (IPoint.getNthDimension(dimension) < northEast.getNthDimension(dimension) && IPoint.getNthDimension(dimension) < southWest.getNthDimension(dimension)) {
+            return Location.EAST;
         }
         return Location.CANNOT_SAY;
     }
 
     @Override
-    public boolean isInside(Point point) {
-        if (point == null) {
-            throw new NullPointerException("Point can not be null");
+    public boolean isInside(IPoint IPoint) {
+        if (IPoint == null) {
+            throw new NullPointerException("IPoint can not be null");
         }
 
-        if (point.getNumberOfDimensions() != 2) {
+        if (IPoint.getNumberOfDimensions() != 2) {
             throw new IllegalArgumentException("Number of dimensions must be 2");
         }
 
-        return point.getNthDimension(0) >= southWest.getNthDimension(0) &&
-                point.getNthDimension(0) <= northEast.getNthDimension(0) &&
-                point.getNthDimension(1) >= southWest.getNthDimension(1) &&
-                point.getNthDimension(1) <= northEast.getNthDimension(1);
+        return IPoint.getNthDimension(0) >= southWest.getNthDimension(0) &&
+                IPoint.getNthDimension(0) <= northEast.getNthDimension(0) &&
+                IPoint.getNthDimension(1) >= southWest.getNthDimension(1) &&
+                IPoint.getNthDimension(1) <= northEast.getNthDimension(1);
 
     }
 
