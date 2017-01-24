@@ -17,6 +17,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class KDTreeTest {
     @Test
+    void delete() {
+        KDTree<Object> tree = constructTree1();
+        tree.delete(getPointObject(new double[]{30.0, 40.0}));
+        assertEquals(null, tree.searchSingle(getPointObject(new double[]{30.0, 40.0})));
+
+        tree.delete(getPointObject(new double[]{70.0, 70.0}));
+        assertEquals(null, tree.searchSingle(getPointObject(new double[]{70.0, 70.0})));
+    }
+
+    @Test
     void findMinimum() {
         KDTree<Object> tree = constructTree();
         assertEquals(2, tree.findMinimum(0));

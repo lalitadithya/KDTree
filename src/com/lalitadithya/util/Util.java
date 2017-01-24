@@ -33,6 +33,17 @@ public class Util {
         return tree;
     }
 
+    public static KDTree<Object> constructTree1() {
+        KDTree<Object> tree = new KDTree<>(2);
+        tree.insertNode("a", getPointObject(new double[]{30, 40}));
+        tree.insertNode("b", getPointObject(new double[]{5, 25}));
+        tree.insertNode("c", getPointObject(new double[]{70, 70}));
+        tree.insertNode("d", getPointObject(new double[]{10, 12}));
+        tree.insertNode("e", getPointObject(new double[]{50, 30}));
+        tree.insertNode("f", getPointObject(new double[]{35, 45}));
+        return tree;
+    }
+
     public static boolean checkEqality(List<Object> actual, Object[] expected) {
         for (Object exp : expected) {
             if (actual.indexOf(exp) == -1) {

@@ -66,6 +66,68 @@ public class KDTree<T> {
         return _findMinimum(rootNode, dimension, 0).getPoint().getNthDimension(dimension);
     }
 
+    public void delete(Point point) {
+        if (point == null) {
+            throw new NullPointerException("point can not be null");
+        }
+
+        rootNode = _delete(rootNode, point, 0);
+        size--;
+    }
+
+    public void visualize() {
+        _visualize(rootNode, 0);
+    }
+
+    private void _visualize(Node<T> node, int numberOfSpaces) {
+        if (node == null) {
+            System.out.println();
+            return;
+        }
+        for (int i = 0; i < numberOfSpaces; i++) {
+            System.out.print(" ");
+        }
+        System.out.println(node.getObject() + "[" + node.getPoint() + "]");
+        _visualize(node.getLeftChild(), numberOfSpaces + 2);
+        _visualize(node.getRightChild(), numberOfSpaces + 2);
+    }
+
+    private Node<T> _delete(Node<T> node, Point point, int currentDimension) {
+        if (node == null) {
+            return null;
+        }
+
+        if (node.getPoint().equals(point)) {
+            if (node.getRightChild() != null) {
+                Node<T> minimum = _findMinimum(node.getRightChild(), currentDimension, 0);
+
+                node.setPoint(minimum.getPoint());
+                node.setObject(minimum.getObject());
+
+                node.setRightChild(_delete(node.getRightChild(), minimum.getPoint(), (currentDimension + 1) % numberOfDimensions));
+            } else if (node.getLeftChild() != null) {
+                Node<T> minimum = _findMinimum(node.getLeftChild(), currentDimension, 0);
+
+                node.setPoint(minimum.getPoint());
+                node.setObject(minimum.getObject());
+
+                node.setRightChild(_delete(node.getLeftChild(), minimum.getPoint(), (currentDimension + 1) % numberOfDimensions));
+            } else {
+                node = null;
+                return null;
+            }
+            return node;
+        }
+
+        if (node.getPoint().getNthDimension(currentDimension) > point.getNthDimension(currentDimension)) {
+            node.setLeftChild(_delete(node.getLeftChild(), point, (currentDimension + 1) % numberOfDimensions));
+        } else {
+            node.setRightChild(_delete(node.getRightChild(), point, (currentDimension + 1) % numberOfDimensions));
+        }
+
+        return node;
+    }
+
     private Node<T> _findMinimum(Node<T> node, int dimension, int currentDimension) {
         if (node == null) {
             return null;

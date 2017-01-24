@@ -9,8 +9,8 @@ import java.util.List;
  * Created by Lalit Adithya on 1/23/2017.
  */
 public class PointIn2DimensionalSpace implements Point {
-    private List<Double> dimensions;
     private static final int NUMBER_OF_DIMENSIONS = 2;
+    private List<Double> dimensions;
 
     public PointIn2DimensionalSpace() {
         dimensions = new ArrayList<>(2);
@@ -54,5 +54,10 @@ public class PointIn2DimensionalSpace implements Point {
 
     public boolean equals(Point other) {
         return this.getDimensions().equals(other.getDimensions());
+    }
+
+    @Override
+    public String toString() {
+        return "(" + dimensions.get(0) + ", " + dimensions.get(1) + ")";
     }
 }
