@@ -5,24 +5,13 @@ import com.lalitadithya.PointIn2DimensionalSpace;
 import com.lalitadithya.Rectangle;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static com.lalitadithya.util.Util.getPointObject;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by Lalit Adithya on 1/24/2017.
  */
 class RectangleTest {
-
-    private PointIn2DimensionalSpace getPointObject(double[] values) {
-        PointIn2DimensionalSpace myPoint = new PointIn2DimensionalSpace();
-        ArrayList<Double> point = new ArrayList<Double>();
-        for (double value : values) {
-            point.add(value);
-        }
-        myPoint.initialize(point);
-        return myPoint;
-    }
 
     @Test
     void getNorthEast() {
