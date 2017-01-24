@@ -39,7 +39,7 @@ class PointIn2DimensionalSpaceTest {
     @Test
     void getNumberOfDimensions() {
         PointIn2DimensionalSpace myPoint = new PointIn2DimensionalSpace();
-        assertEquals(myPoint.getNumberOfDimensions(), 0);
+        assertEquals(myPoint.getNumberOfDimensions(), 2);
 
         ArrayList<Double> point = new ArrayList<>();
         point.add(1.0);

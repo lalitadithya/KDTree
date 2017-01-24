@@ -10,8 +10,6 @@ public interface Point {
 
     void setNthDimension(int n, double value);
 
-    void initialize(List<Double> dimensions);
-
     List<Double> getDimensions();
 
     int getNumberOfDimensions();

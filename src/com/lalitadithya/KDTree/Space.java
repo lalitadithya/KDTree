@@ -4,9 +4,10 @@ package com.lalitadithya.KDTree;
  * Created by Lalit Adithya on 1/23/2017.
  */
 public interface Space {
-    Location getLocationOfPoint(Point point);
 
-    ;
+    Location getLocationOfPoint(Point point, int dimension);
 
-    enum Location {INSIDE, LEFT, RIGHT}
+    int getNumberDimensions();
+
+    enum Location {CANNOT_SAY, LESS_THAN, GREATER_THAN}
 }

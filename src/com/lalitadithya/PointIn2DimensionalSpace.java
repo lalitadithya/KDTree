@@ -10,11 +10,10 @@ import java.util.List;
  */
 public class PointIn2DimensionalSpace implements Point {
     private List<Double> dimensions;
-    private int numberOfDimensions;
+    private static final int NUMBER_OF_DIMENSIONS = 2;
 
     public PointIn2DimensionalSpace() {
-        numberOfDimensions = 0;
-        dimensions = new ArrayList<>();
+        dimensions = new ArrayList<>(2);
     }
 
     @Override
@@ -35,14 +34,12 @@ public class PointIn2DimensionalSpace implements Point {
         dimensions.set(n, value);
     }
 
-    @Override
     public void initialize(List<Double> dimensions) {
         if (dimensions.size() != 2) {
             throw new IllegalArgumentException("Only two dimensions are supported");
         }
 
         this.dimensions = new ArrayList<>(dimensions);
-        numberOfDimensions = this.dimensions.size();
     }
 
     @Override
@@ -52,7 +49,7 @@ public class PointIn2DimensionalSpace implements Point {
 
     @Override
     public int getNumberOfDimensions() {
-        return numberOfDimensions;
+        return NUMBER_OF_DIMENSIONS;
     }
 
     public boolean equals(Point other) {
