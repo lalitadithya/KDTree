@@ -50,6 +50,23 @@ public class Rectangle implements Space {
     }
 
     @Override
+    public boolean isInside(Point point) {
+        if (point == null) {
+            throw new NullPointerException("Point can not be null");
+        }
+
+        if (point.getNumberOfDimensions() != 2) {
+            throw new IllegalArgumentException("Number of dimensions must be 2");
+        }
+
+        return point.getNthDimension(0) >= southWest.getNthDimension(0) &&
+                point.getNthDimension(0) <= northEast.getNthDimension(0) &&
+                point.getNthDimension(1) >= southWest.getNthDimension(1) &&
+                point.getNthDimension(1) <= northEast.getNthDimension(1);
+
+    }
+
+    @Override
     public int getNumberDimensions() {
         return NUMBER_DIMENSIONS;
     }

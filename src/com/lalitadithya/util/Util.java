@@ -4,6 +4,7 @@ import com.lalitadithya.KDTree.KDTree;
 import com.lalitadithya.PointIn2DimensionalSpace;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Lalit Adithya on 1/24/2017.
@@ -30,5 +31,14 @@ public class Util {
         tree.insertNode("f", getPointObject(new double[]{2.0, 7.0}));
         tree.insertNode("g", getPointObject(new double[]{10.0, 19.0}));
         return tree;
+    }
+
+    public static boolean checkEqality(List<Object> actual, Object[] expected) {
+        for (Object exp : expected) {
+            if (actual.indexOf(exp) == -1) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -2,12 +2,13 @@ package com.lalitadithya.test;
 
 import com.lalitadithya.KDTree.KDTree;
 import com.lalitadithya.PointIn2DimensionalSpace;
+import com.lalitadithya.Rectangle;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static com.lalitadithya.util.Util.constructTree;
-import static com.lalitadithya.util.Util.getPointObject;
+import static com.lalitadithya.util.Util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -19,13 +20,29 @@ class KDTreeTest {
     @Test
     void searchRange() {
         KDTree<Object> tree = constructTree();
+
+        assertThrows(NullPointerException.class, () -> {
+            tree.searchRange(null);
+        });
+
+        Rectangle space = new Rectangle(getPointObject(new double[]{18, 18}), getPointObject(new double[]{12, 14}));
+        List<Object> result = tree.searchRange(space);
+        assertEquals(true, checkEqality(result, new String[]{"b", "c"}));
+
+        space = new Rectangle(getPointObject(new double[]{20, 20}), getPointObject(new double[]{0, 0}));
+        result = tree.searchRange(space);
+        assertEquals(true, checkEqality(result, new String[]{"a", "b", "c", "d", "e", "f", "g"}));
+
+        space = new Rectangle(getPointObject(new double[]{40, 40}), getPointObject(new double[]{30, 30}));
+        result = tree.searchRange(space);
+        assertEquals(0, result.size());
     }
 
     @Test
     void searchSingle() {
         KDTree<Object> tree = constructTree();
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             tree.searchSingle(null);
         });
 

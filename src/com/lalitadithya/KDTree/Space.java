@@ -7,6 +7,8 @@ public interface Space {
 
     Location getLocationOfPoint(Point point, int dimension);
 
+    boolean isInside(Point point);
+
     int getNumberDimensions();
 
     enum Location {CANNOT_SAY, LESS_THAN, GREATER_THAN}

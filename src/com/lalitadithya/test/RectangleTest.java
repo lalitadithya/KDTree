@@ -7,11 +7,26 @@ import org.junit.jupiter.api.Test;
 
 import static com.lalitadithya.util.Util.getPointObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Created by Lalit Adithya on 1/24/2017.
  */
 class RectangleTest {
+    @Test
+    void isInside() {
+        Rectangle rectangle = new Rectangle(getPointObject(new double[]{1.0, 2.0}), getPointObject(new double[]{1.0, 2.0}));
+        assertThrows(NullPointerException.class, () -> {
+            rectangle.isInside(null);
+        });
+
+        PointIn2DimensionalSpace myPoint = getPointObject(new double[]{10.0, 10.0});
+        Rectangle rectangle1 = new Rectangle(getPointObject(new double[]{5.0, 5.0}), getPointObject(new double[]{2.0, 3.0}));
+        assertEquals(false, rectangle1.isInside(myPoint));
+
+        myPoint = getPointObject(new double[]{2.0, 4.0});
+        assertEquals(true, rectangle1.isInside(myPoint));
+    }
 
     @Test
     void getNorthEast() {

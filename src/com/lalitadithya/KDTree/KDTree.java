@@ -1,5 +1,8 @@
 package com.lalitadithya.KDTree;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Lalit Adithya on 1/23/2017.
  */
@@ -30,7 +33,7 @@ public class KDTree<T> {
 
     public T searchSingle(Point point) {
         if (point == null) {
-            throw new IllegalArgumentException("Point can not be null");
+            throw new NullPointerException("Space can not be null");
         }
 
         if (point.getNumberOfDimensions() != numberOfDimensions) {
@@ -38,6 +41,42 @@ public class KDTree<T> {
         }
 
         return _searchSingle(rootNode, point, 0);
+    }
+
+    public List<T> searchRange(Space space) {
+        if (space == null) {
+            throw new NullPointerException("Space can not be null");
+        }
+
+        if (space.getNumberDimensions() != numberOfDimensions) {
+            throw new IllegalArgumentException("Number of dimensions must be " + numberOfDimensions);
+        }
+
+        List<T> result = new LinkedList<>();
+        _searchRange(rootNode, space, 0, result);
+
+        return result;
+    }
+
+    private void _searchRange(Node<T> node, Space space, int currentDimension, List<T> result) {
+        if (node != null) {
+            if (space.isInside(node.getPoint())) {
+                result.add(node.getObject());
+            }
+
+            switch (space.getLocationOfPoint(node.getPoint(), currentDimension)) {
+                case GREATER_THAN:
+                    _searchRange(node.getRightChild(), space, (currentDimension + 1) % numberOfDimensions, result);
+                    break;
+                case LESS_THAN:
+                    _searchRange(node.getLeftChild(), space, (currentDimension + 1) % numberOfDimensions, result);
+                    break;
+                case CANNOT_SAY:
+                    _searchRange(node.getLeftChild(), space, (currentDimension + 1) % numberOfDimensions, result);
+                    _searchRange(node.getRightChild(), space, (currentDimension + 1) % numberOfDimensions, result);
+                    break;
+            }
+        }
     }
 
     private T _searchSingle(Node<T> node, Point point, int currentDimension) {
