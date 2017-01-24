@@ -16,6 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Created by Lalit Adithya on 1/23/2017.
  */
 class KDTreeTest {
+    @Test
+    void findMinimum() {
+        KDTree<Object> tree = constructTree();
+        assertEquals(2, tree.findMinimum(0));
+        assertEquals(1, tree.findMinimum(1));
+    }
 
     @Test
     void searchRange() {

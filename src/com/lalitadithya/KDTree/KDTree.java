@@ -58,6 +58,50 @@ public class KDTree<T> {
         return result;
     }
 
+    public double findMinimum(int dimension) {
+        if (dimension < 0 || dimension >= numberOfDimensions) {
+            throw new IllegalArgumentException("dimension must be between 0 and " + numberOfDimensions);
+        }
+
+        return _findMinimum(rootNode, dimension, 0).getPoint().getNthDimension(dimension);
+    }
+
+    private Node<T> _findMinimum(Node<T> node, int dimension, int currentDimension) {
+        if (node == null) {
+            return null;
+        }
+
+        if (currentDimension == dimension) {
+            if (node.getLeftChild() == null) {
+                return node;
+            }
+
+            return _findMinimum(node.getLeftChild(), dimension, (currentDimension + 1) % numberOfDimensions);
+        }
+
+        double currentDimensionValue = node.getPoint().getNthDimension(dimension);
+        Node<T> leftTreeDimensionValue = _findMinimum(node.getLeftChild(), dimension, (currentDimension + 1) % numberOfDimensions);
+        Node<T> rightTreeDimensionValue = _findMinimum(node.getRightChild(), dimension, (currentDimension + 1) % numberOfDimensions);
+
+        double min = 0.0;
+        if (leftTreeDimensionValue != null && rightTreeDimensionValue != null) {
+            min = Double.min(currentDimensionValue, Double.min(leftTreeDimensionValue.getPoint().getNthDimension(dimension), rightTreeDimensionValue.getPoint().getNthDimension(dimension)));
+        } else if (leftTreeDimensionValue != null) {
+            min = Double.min(currentDimensionValue, leftTreeDimensionValue.getPoint().getNthDimension(dimension));
+        } else if (rightTreeDimensionValue != null) {
+            min = Double.min(currentDimensionValue, rightTreeDimensionValue.getPoint().getNthDimension(dimension));
+        }
+
+        if (min == currentDimensionValue) {
+            return node;
+        } else if ((leftTreeDimensionValue != null) && (min == leftTreeDimensionValue.getPoint().getNthDimension(dimension))) {
+            return leftTreeDimensionValue;
+        } else if ((rightTreeDimensionValue != null) && (min == rightTreeDimensionValue.getPoint().getNthDimension(dimension))) {
+            return rightTreeDimensionValue;
+        }
+        return node;
+    }
+
     private void _searchRange(Node<T> node, Space space, int currentDimension, List<T> result) {
         if (node != null) {
             if (space.isInside(node.getPoint())) {
